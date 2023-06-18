@@ -4,7 +4,7 @@
     /// <summary>
     /// A class representing a tile of the board.
     /// </summary>
-    public class BoardTile
+    public class BoardTile : IEquatable<BoardTile>
     {
         /// <summary>
         /// Creates a grid tile based on the desired color and ID.
@@ -46,5 +46,12 @@
         /// The compound row/col identifier of the cell.
         /// </summary>
         public string ID { get; }
+
+        /// <inheritdoc/>
+        public bool Equals(BoardTile other)
+        {
+            return this.TileColor == other.TileColor
+                && this.ID == other.ID;
+        }
     }
 }
