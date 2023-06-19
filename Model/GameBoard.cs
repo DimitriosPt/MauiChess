@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,17 +14,21 @@ namespace MauiChess.Model
     {
         public GameBoard()
         {
-            this.BoardLayout = new BoardTile[8, 8];
+            this.BoardLayout = new ObservableCollection<ObservableCollection<BoardTile>>();
 
             for (int i = 0; i < 8; i++)
             {
+                ObservableCollection<BoardTile> columnOfTiles = new ObservableCollection<BoardTile>();
+
                 for (int j = 0; j < 8; j++)
                 {
-                    this.BoardLayout[i, j] = new BoardTile(i, j);
+                    columnOfTiles.Add(new BoardTile(i,j));
                 }
+
+                BoardLayout.Add(columnOfTiles);
             }
         }
 
-        public BoardTile[,] BoardLayout { get; }
+        public ObservableCollection<ObservableCollection<BoardTile>> BoardLayout { get; }
     }
 }
